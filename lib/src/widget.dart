@@ -130,7 +130,7 @@ class SmartSelect<T> extends StatelessWidget {
   final SmartSelectState<T> _state;
 
   /// Called on search
-  final void Function(String) onSearch;
+  final Future<List<SmartSelectOption<T>>> Function(String) onSearch;
 
   /// Constructor for single choice
   SmartSelect.single({
@@ -266,8 +266,8 @@ class SmartSelect<T> extends StatelessWidget {
                 useConfirmation: modalConfig.useConfirmation
               ),
         ),
-        ChangeNotifierProvider<SmartSelectStateFilter>(
-          create: (_) => SmartSelectStateFilter(),
+        ChangeNotifierProvider<SmartSelectStateFilter<T>>(
+          create: (_) => SmartSelectStateFilter<T>(_state.options, onSearch),
         ),
       ],
       child: Builder(
@@ -283,11 +283,10 @@ class SmartSelect<T> extends StatelessWidget {
                   type: choiceType,
                   config: choiceConfig,
                   query: state.query,
-                  items: _state.options,
+                  items: state.options,
                 );
               },
             ),
-            onSearch: onSearch,
           );
         },
       ),

@@ -36,10 +36,10 @@ class SmartSelectChoices<T> extends StatelessWidget {
               color: config.glowingOverscrollIndicatorColor,
               child: Builder(
                 builder: (context) {
-                  return _filteredItems.length > 0
+                  return items.length > 0
                     ? _isGrouped == true
-                      ? SmartSelectChoicesGrouped<T>(_groupKeys, _filteredItems, type, config)
-                      : SmartSelectChoicesList<T>(_filteredItems, type, config)
+                      ? SmartSelectChoicesGrouped<T>(_groupKeys, items, type, config)
+                      : SmartSelectChoicesList<T>(items, type, config)
                     : config.emptyBuilder?.call(query) ?? SmartSelectChoicesEmpty();
                 },
               )

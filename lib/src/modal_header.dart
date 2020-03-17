@@ -9,14 +9,12 @@ class SmartSelectModalHeader extends StatelessWidget implements PreferredSizeWid
   final String title;
   final SmartSelectModalType type;
   final SmartSelectModalConfig config;
-  final void Function(String) onSearch;
 
   SmartSelectModalHeader({
     Key key,
     @required this.title,
     @required this.type,
     @required this.config,
-    @required this.onSearch,
   }) : super(key: key);
 
   @override
@@ -42,10 +40,7 @@ class SmartSelectModalHeader extends StatelessWidget implements PreferredSizeWid
         hintText: config.searchBarHint ?? 'Search on $title',
         hintStyle: textStyle,
       ),
-      onSubmitted: (String value) {
-        if (onSearch != null) onSearch(value);
-        filter.setQuery(value);
-      },
+      onSubmitted: filter.setQuery,
     );
 
     Widget confirmButton = config.useConfirmation && !isFiltering

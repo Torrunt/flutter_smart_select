@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:smart_select/smart_select.dart';
 
-class SmartSelectStateFilter extends ChangeNotifier {
-
+class SmartSelectStateFilter<T> extends ChangeNotifier {
   final TextEditingController ctrl = TextEditingController();
 
   bool _activated = false;
@@ -12,6 +12,11 @@ class SmartSelectStateFilter extends ChangeNotifier {
   bool get activated => _activated;
 
   String get query => _query;
+
+  List<SmartSelectOption<T>> options;
+  Future<List<SmartSelectOption<T>>> Function(String) onSearch;
+
+  SmartSelectStateFilter(this.options, this.onSearch);
 
   @override
   void dispose() {
@@ -35,9 +40,10 @@ class SmartSelectStateFilter extends ChangeNotifier {
     setQuery(null);
   }
 
-  void setQuery(String val) {
+  void setQuery(String val) async {
     _query = val;
+    List<SmartSelectOption<T>> result = await onSearch(val);
+    if (result != null) options = result;
     notifyListeners();
   }
-
 }
