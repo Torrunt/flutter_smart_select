@@ -4,7 +4,7 @@ import './model/state_filter.dart';
 import './model/modal_theme.dart';
 import './model/modal_config.dart';
 
-class SmartSelectModalHeader extends StatelessWidget implements PreferredSizeWidget {
+class SmartSelectModalHeader<T> extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
   final SmartSelectModalType type;
@@ -20,7 +20,7 @@ class SmartSelectModalHeader extends StatelessWidget implements PreferredSizeWid
   @override
   PreferredSizeWidget build(BuildContext context) {
     // get state
-    SmartSelectStateFilter filter = Provider.of<SmartSelectStateFilter>(context);
+    SmartSelectStateFilter filter = Provider.of<SmartSelectStateFilter<T>>(context);
     bool isFiltering = filter.activated;
 
     String modalTitle = config.title ?? title;

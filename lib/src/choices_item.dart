@@ -59,7 +59,7 @@ class ChoicesItem<T> extends StatelessWidget {
               state.select(value, checked, () {
                 if (state.isMultiChoice != true) {
                   // Pop filtering status
-                  bool isFiltering = Provider.of<SmartSelectStateFilter>(context, listen: false).activated;
+                  bool isFiltering = Provider.of<SmartSelectStateFilter<T>>(context, listen: false).activated;
                   if (isFiltering) Navigator.pop(context);
                   // Pop navigator with confirmed return value
                   if (!state.useConfirmation) Navigator.pop(context, true);

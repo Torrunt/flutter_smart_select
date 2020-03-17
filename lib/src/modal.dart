@@ -3,7 +3,7 @@ import 'package:flutter/material.dart' show Scaffold;
 import './model/modal_config.dart';
 import './modal_header.dart';
 
-class SmartSelectModal extends StatelessWidget {
+class SmartSelectModal<T> extends StatelessWidget {
 
   final String title;
   final SmartSelectModalType type;
@@ -37,7 +37,7 @@ class SmartSelectModal extends StatelessWidget {
 
   Widget get _routeHeader {
     return config.useHeader
-      ? SmartSelectModalHeader(
+      ? SmartSelectModalHeader<T>(
           title: config?.title ?? title,
           type: type,
           config: config,

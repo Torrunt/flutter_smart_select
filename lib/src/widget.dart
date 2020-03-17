@@ -273,11 +273,11 @@ class SmartSelect<T> extends StatelessWidget {
       child: Builder(
         builder: (_) {
           _context = _;
-          return SmartSelectModal(
+          return SmartSelectModal<T>(
             title: title,
             type: modalType,
             config: modalConfig,
-            choices: Consumer<SmartSelectStateFilter>(
+            choices: Consumer<SmartSelectStateFilter<T>>(
               builder: (context, state, _) {
                 return SmartSelectChoices<T>(
                   type: choiceType,
