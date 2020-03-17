@@ -9,6 +9,7 @@ class SmartSelectModal extends StatelessWidget {
   final SmartSelectModalType type;
   final SmartSelectModalConfig config;
   final Widget choices;
+  final void Function(String) onSearch;
 
   SmartSelectModal({
     Key key,
@@ -16,6 +17,7 @@ class SmartSelectModal extends StatelessWidget {
     @required this.type,
     @required this.config,
     @required this.choices,
+    @required this.onSearch,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,7 @@ class SmartSelectModal extends StatelessWidget {
           title: config?.title ?? title,
           type: type,
           config: config,
+          onSearch: onSearch,
         )
       : null;
   }

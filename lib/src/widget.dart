@@ -129,6 +129,9 @@ class SmartSelect<T> extends StatelessWidget {
   /// state used internally
   final SmartSelectState<T> _state;
 
+  /// Called on search
+  final void Function(String) onSearch;
+
   /// Constructor for single choice
   SmartSelect.single({
     Key key,
@@ -151,6 +154,7 @@ class SmartSelect<T> extends StatelessWidget {
     this.choiceConfig = const SmartSelectChoiceConfig(),
     this.modalConfig = const SmartSelectModalConfig(),
     this.builder,
+    this.onSearch,
   }) : assert(choiceType == SmartSelectChoiceType.radios || choiceType == SmartSelectChoiceType.chips, 'SmartSelect.single only support SmartSelectChoiceType.radios and SmartSelectChoiceType.chips'),
     isMultiChoice = false,
     _onChangeMultiple = null,
@@ -185,6 +189,7 @@ class SmartSelect<T> extends StatelessWidget {
     this.choiceConfig = const SmartSelectChoiceConfig(),
     this.modalConfig = const SmartSelectModalConfig(),
     this.builder,
+    this.onSearch,
   }) : assert(choiceType == SmartSelectChoiceType.checkboxes || choiceType == SmartSelectChoiceType.switches || choiceType == SmartSelectChoiceType.chips, 'SmartSelect.multiple only support SmartSelectChoiceType.checkboxes, SmartSelectChoiceType.switches and SmartSelectChoiceType.chips'),
     isMultiChoice = true,
     _onChangeSingle = null,
@@ -282,6 +287,7 @@ class SmartSelect<T> extends StatelessWidget {
                 );
               },
             ),
+            onSearch: onSearch,
           );
         },
       ),

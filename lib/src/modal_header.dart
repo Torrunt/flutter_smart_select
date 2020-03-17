@@ -9,12 +9,14 @@ class SmartSelectModalHeader extends StatelessWidget implements PreferredSizeWid
   final String title;
   final SmartSelectModalType type;
   final SmartSelectModalConfig config;
+  final void Function(String) onSearch;
 
   SmartSelectModalHeader({
     Key key,
     @required this.title,
     @required this.type,
     @required this.config,
+    @required this.onSearch,
   }) : super(key: key);
 
   @override
@@ -26,7 +28,7 @@ class SmartSelectModalHeader extends StatelessWidget implements PreferredSizeWid
     String modalTitle = config.title ?? title;
 
     // define text style
-    TextStyle textStyle = Theme.of(context).textTheme.title.merge(theme.textStyle);
+    TextStyle textStyle = Theme.of(context).textTheme.headline6.merge(theme.textStyle);
 
     // build title widget
     Widget titleWidget = Text(modalTitle, style: textStyle);
@@ -40,7 +42,10 @@ class SmartSelectModalHeader extends StatelessWidget implements PreferredSizeWid
         hintText: config.searchBarHint ?? 'Search on $title',
         hintStyle: textStyle,
       ),
-      onSubmitted: filter.setQuery,
+      onSubmitted: (String value) {
+        if (onSearch != null) onSearch(value);
+        filter.setQuery(value);
+      },
     );
 
     Widget confirmButton = config.useConfirmation && !isFiltering
