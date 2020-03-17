@@ -283,7 +283,7 @@ class SmartSelect<T> extends StatelessWidget {
                   type: choiceType,
                   config: choiceConfig,
                   query: state.query,
-                  items: options,
+                  items: _state.options,
                 );
               },
             ),
